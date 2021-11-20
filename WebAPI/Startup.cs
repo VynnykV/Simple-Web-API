@@ -1,3 +1,4 @@
+using Application.Common.Mappings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace WebAPI
             services.AddControllers();
             services.AddDbContext<NoteDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper(typeof(NoteProfile), typeof(UserProfile));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
