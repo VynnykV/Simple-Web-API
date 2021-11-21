@@ -1,11 +1,11 @@
-using Application.Common.Mappings;
+using Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Persistence;
+using WebAPI.Mappings;
 
 namespace WebAPI
 {
@@ -21,9 +21,9 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<NoteDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddAutoMapper(typeof(NoteProfile), typeof(UserProfile));
+            services.AddPersistence(Configuration);
+            services.AddApplication();
+            services.AddAutoMapper(typeof(NoteDtoProfile));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
