@@ -52,9 +52,9 @@ namespace WebAPI.Controllers
             return Ok(noteId);
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateNote([FromBody] UpdateNoteDto updateNoteCommand)
+        public async Task<IActionResult> UpdateNote([FromBody] UpdateNoteDto updateNoteDto)
         {
-            var command = _mapper.Map<UpdateNoteCommand>(updateNoteCommand);
+            var command = _mapper.Map<UpdateNoteCommand>(updateNoteDto);
             command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
