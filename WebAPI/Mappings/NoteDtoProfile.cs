@@ -11,7 +11,7 @@ namespace WebAPI.Mappings
         {
             CreateMap<CreateNoteDto, CreateNoteCommand>()
                 .ForMember(noteC => noteC.Title,
-                opt => opt.MapFrom(noteDto => noteDto))
+                opt => opt.MapFrom(note => note.Title))
                 .ForMember(noteC => noteC.Details,
                 opt => opt.MapFrom(note => note.Details));
             CreateMap<UpdateNoteDto, UpdateNoteCommand>()

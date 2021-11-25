@@ -4,12 +4,14 @@ using Application.Notes.Commands.UpdateNote;
 using Application.Notes.Queries.GetNoteDetails;
 using Application.Notes.Queries.GetNoteList;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class NoteController : BaseController
     {
