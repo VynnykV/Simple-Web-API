@@ -11,7 +11,7 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddAutoMapper(typeof(NoteProfile), typeof(UserProfile));
+            services.AddAutoMapper(typeof(NoteProfile));
             return services;
         }
     }

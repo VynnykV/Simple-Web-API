@@ -4,12 +4,14 @@ using Application.Notes.Commands.UpdateNote;
 using Application.Notes.Queries.GetNoteDetails;
 using Application.Notes.Queries.GetNoteList;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class NoteController : BaseController
     {
@@ -50,9 +52,9 @@ namespace WebAPI.Controllers
             return Ok(noteId);
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateNote([FromBody] UpdateNoteDto updateNoteCommand)
+        public async Task<IActionResult> UpdateNote([FromBody] UpdateNoteDto updateNoteDto)
         {
-            var command = _mapper.Map<UpdateNoteCommand>(updateNoteCommand);
+            var command = _mapper.Map<UpdateNoteCommand>(updateNoteDto);
             command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
