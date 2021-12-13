@@ -1,7 +1,8 @@
-﻿using Application.Common.Mappings;
+﻿using Application.Behaviors;
+using Application.Common.Mappings;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-
 using System.Reflection;
 
 namespace Application
@@ -12,6 +13,9 @@ namespace Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(typeof(NoteProfile));
+            services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
+            services.AddTransient(typeof(IPipelineBehavior<,>),
+                typeof(ValidatorBehavior<,>));
             return services;
         }
     }
