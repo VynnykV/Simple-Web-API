@@ -15,6 +15,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using WebAPI.Mappings;
+using WebAPI.Middleware;
 
 namespace WebAPI
 {
@@ -107,6 +108,7 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCustomExceptionHandler();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
