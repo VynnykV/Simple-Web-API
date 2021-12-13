@@ -29,6 +29,7 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             services.AddApplication();
             services.AddAutoMapper(typeof(NoteDtoProfile));
@@ -93,6 +94,15 @@ namespace WebAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+            }
+            
+            );
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
